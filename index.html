@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>রমজান ২০২৬</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:SolaimanLipi,Arial;}
+
+body{
+  background:linear-gradient(135deg,#78350f,#facc15); /* Default Gold Theme */
+  color:white;
+  padding:10px;
+  transition:0.5s;
+  overscroll-behavior-y: contain; /* smooth scroll on all devices */
+  -webkit-overflow-scrolling: touch;
+}
+
+header{text-align:center;margin-bottom:10px;}
+h1{font-size:22px;}
+
+.card{
+  background:rgba(255,255,255,.12);
+  padding:12px;
+  margin:8px 0;
+  border-radius:12px;
+  backdrop-filter:blur(8px);
+  word-break: break-word;
+}
+
+button{
+  padding:8px;
+  border:none;
+  border-radius:8px;
+  margin:4px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+#calendar{
+  display:none;
+  overflow:auto;
+  overscroll-behavior: contain;
+}
+
+.calendar-block{
+  margin-bottom:10px;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  color:black;
+}
+
+th,td{
+  border:1px solid #333;
+  padding:5px;
+  font-size:11px;
+  text-align:center;
+}
+
+th{background:#facc15;}
+
+.theme button{width:18%;}
+
+@media(max-width:600px){
+  h1{font-size:16px;}
+  th,td{font-size:9px;}
+  button{padding:6px;font-size:10px;}
+  table, .calendar-block{display:block;overflow-x:auto;}
+}
+
+#iftarCountdown{
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  margin:10px 0;
+  color:#facc15;
+}
+
+#tasbihCounter{
+  text-align:center;
+  font-size:20px;
+  font-weight:bold;
+  margin:10px 0;
+  color:#fff;
+}
+
+/* themes */
+.gold{background:linear-gradient(135deg,#78350f,#facc15);}
+.blue{background:linear-gradient(135deg,#0f172a,#1e3a8a);}
+.green{background:linear-gradient(135deg,#022c22,#16a34a);}
+.pink{background:linear-gradient(135deg,#831843,#f472b6);}
+.purple{background:linear-gradient(135deg,#2e1065,#a855f7);}
+
+/* calendar block colors */
+.block1 table{background:linear-gradient(135deg,#facc15,#fcd34d);}
+.block2 table{background:linear-gradient(135deg,#0f172a,#1e3a8a); color:white;}
+.block3 table{background:linear-gradient(135deg,#16a34a,#4ade80); color:white;}
+</style>
+</head>
+
+<body class="gold">
+
+<header>
+<h1>🌙 রমজান ২০২৬ | ১৪৪৭ হিজরি | ১৪৩২ বঙ্গাব্দ | খুলনা জেলা</h1>
+<div id="time"></div>
+</header>
+
+<div class="card" id="iftarCountdown">
+ইফতারের জন্য অবশিষ্ট সময়: 00:00:00
+</div>
+
+<div class="card" id="tasbihCounter">
+<b>Tasbih Counter:</b><br>
+<span id="tasbihValue">0</span><br>
+<button onclick="tasbihAdd()">+</button>
+<button onclick="tasbihReset()">Reset</button>
+</div>
+
+<div class="card theme">
+<b>Theme:</b><br>
+<button onclick="setTheme('gold')">Gold</button>
+<button onclick="setTheme('blue')">Blue</button>
+<button onclick="setTheme('green')">Green</button>
+<button onclick="setTheme('pink')">Pink</button>
+<button onclick="setTheme('purple')">Purple</button>
+</div>
+
+<div class="card">
+<button onclick="toggleCal()">📅 ক্যালেন্ডার দেখুন / লুকান</button>
+</div>
+
+<div class="card" id="calendar">
+<!-- Calendar Blocks -->
+<div class="calendar-block block1">
+<table>
+<tr><th>রোজা</th><th>তারিখ</th><th>সেহরি শেষ</th><th>ফজর</th><th>ইফতার</th></tr>
+<tr><td>১</td><td>১৯ ফেব্রু</td><td>৫:১৫</td><td>৫:১৮</td><td>৬:০২</td></tr>
+<tr><td>২</td><td>২০ ফেব্রু</td><td>৫:১৪</td><td>৫:১৭</td><td>৬:০২</td></tr>
+<tr><td>৩</td><td>২১ ফেব্রু</td><td>৫:১৩</td><td>৫:১৬</td><td>৬:০৩</td></tr>
+<tr><td>৪</td><td>২২ ফেব্রু</td><td>৫:১৩</td><td>৫:১৬</td><td>৬:০৩</td></tr>
+<tr><td>৫</td><td>২৩ ফেব্রু</td><td>৫:১২</td><td>৫:১৫</td><td>৬:০৪</td></tr>
+<tr><td>৬</td><td>২৪ ফেব্রু</td><td>৫:১১</td><td>৫:১৪</td><td>৬:০৪</td></tr>
+<tr><td>৭</td><td>২৫ ফেব্রু</td><td>৫:১১</td><td>৫:১৪</td><td>৬:০৫</td></tr>
+<tr><td>৮</td><td>২৬ ফেব্রু</td><td>৫:১০</td><td>৫:১৩</td><td>৬:০৫</td></tr>
+<tr><td>৯</td><td>২৭ ফেব্রু</td><td>৫:০৯</td><td>৫:১২</td><td>৬:০৬</td></tr>
+<tr><td>১০</td><td>২৮ ফেব্রু</td><td>৫:০৮</td><td>৫:১১</td><td>৬:০৬</td></tr>
+</table>
+</div>
+
+<div class="calendar-block block2">
+<table>
+<tr><th>রোজা</th><th>তারিখ</th><th>সেহরি শেষ</th><th>ফজর</th><th>ইফতার</th></tr>
+<tr><td>১১</td><td>০১ মার্চ</td><td>৫:০৮</td><td>৫:১০</td><td>৬:০৭</td></tr>
+<tr><td>১২</td><td>০২ মার্চ</td><td>৫:০৭</td><td>৫:১০</td><td>৬:০৭</td></tr>
+<tr><td>১৩</td><td>০৩ মার্চ</td><td>৫:০৬</td><td>৫:০৯</td><td>৬:০৮</td></tr>
+<tr><td>১৪</td><td>০৪ মার্চ</td><td>৫:০৫</td><td>৫:০৮</td><td>৬:০৮</td></tr>
+<tr><td>১৫</td><td>০৫ মার্চ</td><td>৫:০৪</td><td>৫:০৭</td><td>৬:০৮</td></tr>
+<tr><td>১৬</td><td>০৬ মার্চ</td><td>৫:০৩</td><td>৫:০৬</td><td>৬:০৯</td></tr>
+<tr><td>১৭</td><td>০৭ মার্চ</td><td>৫:০২</td><td>৫:০৫</td><td>৬:০৯</td></tr>
+<tr><td>১৮</td><td>০৮ মার্চ</td><td>৫:০২</td><td>৫:০৫</td><td>৬:১০</td></tr>
+<tr><td>১৯</td><td>০৯ মার্চ</td><td>৫:০১</td><td>৫:০৪</td><td>৬:১০</td></tr>
+<tr><td>২০</td><td>১০ মার্চ</td><td>৫:০০</td><td>৫:০৩</td><td>৬:১০</td></tr>
+</table>
+</div>
+
+<div class="calendar-block block3">
+<table>
+<tr><th>রোজা</th><th>তারিখ</th><th>সেহরি শেষ</th><th>ফজর</th><th>ইফতার</th></tr>
+<tr><td>২১</td><td>১১ মার্চ</td><td>৪:৫৯</td><td>৫:০২</td><td>৬:১১</td></tr>
+<tr><td>২২</td><td>১২ মার্চ</td><td>৪:৫৮</td><td>৫:০১</td><td>৬:১১</td></tr>
+<tr><td>২৩</td><td>১৩ মার্চ</td><td>৪:৫৭</td><td>৫:০০</td><td>৬:১২</td></tr>
+<tr><td>২৪</td><td>১৪ মার্চ</td><td>৪:৫৬</td><td>৪:৫৯</td><td>৬:১২</td></tr>
+<tr><td>২৫</td><td>১৫ মার্চ</td><td>৪:৫৫</td><td>৪:৫৮</td><td>৬:১৩</td></tr>
+<tr><td>২৬</td><td>১৬ মার্চ</td><td>৪:৫৪</td><td>৪:৫৭</td><td>৬:১৩</td></tr>
+<tr><td>২৭</td><td>১৭ মার্চ</td><td>৪:৫৩</td><td>৪:৫৬</td><td>৬:১৩</td></tr>
+<tr><td>২৮</td><td>১৮ মার্চ</td><td>৪:৫২</td><td>৪:৫৫</td><td>৬:১৪</td></tr>
+<tr><td>২৯</td><td>১৯ মার্চ</td><td>৪:৫১</td><td>৪:৫৪</td><td>৬:১৪</td></tr>
+<tr><td>৩০</td><td>২০ মার্চ</td><td>৪:৫০</td><td>৪:৫৩</td><td>৬:১৪</td></tr>
+</table>
+</div>
+
+</div>
+
+<div class="card">
+<b>সেহরির নিয়ত</b><br>
+نَوَيْتُ أَنْ أَصُوْمَ الْيَوْمَ مِنْ شَهْرِ رَمَضَانَ<br>
+আমি আজকের রমজানের সেহরি রাখার নিয়ত করলাম
+</div>
+
+<div class="card">
+<b>রোজার নিয়ত</b><br>
+نَوَيْتُ أَنْ أَصُوْمَ غَدًا مِنْ شَهْরِ رَمَضَانَ<br>
+আমি আগামীকালের রমজানের রোজা রাখার নিয়ত করলাম
+</div>
+
+<div class="card">
+<b>ইফতারের দোয়া</b><br>
+اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ<br>
+হে আল্লাহ! আমি তোমার জন্য রোজা রেখেছি
+</div>
+
+<div class="card" style="text-align:center">
+© Ramadan Kareem 2026 • SheFaul-1830
+</div>
+
+<!-- Azan Audio -->
+<audio id="azanAudio">
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// live date & time
+setInterval(()=>{time.innerText=new Date().toLocaleString()},1000)
+
+// toggle calendar
+function toggleCal(){calendar.style.display = calendar.style.display=="block"?"none":"block"}
+
+// theme switch
+function setTheme(t){document.body.className=t}
+
+// tasbih counter
+let tasbih = 0;
+function tasbihAdd(){ tasbih++; document.getElementById('tasbihValue').innerText = tasbih; }
+function tasbihReset(){ tasbih = 0; document.getElementById('tasbihValue').innerText = tasbih; }
+
+// iftar countdown + alarm + azan
+function updateCountdown(){
+  const now = new Date()
+  let iftarTime = new Date()
+  const hours = 18, minutes = 16; 
+  iftarTime.setHours(hours, minutes, 0, 0)
+  if(now > iftarTime){ iftarTime.setDate(iftarTime.getDate()+1) }
+  let diff = iftarTime - now
+  let h = Math.floor(diff / 1000 / 3600)
+  let m = Math.floor((diff/1000/60)%60)
+  let s = Math.floor((diff/1000)%60)
+  iftarCountdown.innerText = `ইফতারের জন্য অবশিষ্ট সময়: ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`
+
+  // alarm + azan
+  if(diff <= 1000){ 
+    alert("ইফতার হয়েছে! খাইতে বসো 🍽️");
+    document.getElementById('azanAudio').play();
+  }
+}
+
+setInterval(updateCountdown,1000)
+</script>
+
+</body>
+</html>
